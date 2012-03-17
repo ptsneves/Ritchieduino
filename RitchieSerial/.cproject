@@ -29,7 +29,7 @@
 								<option id="de.innot.avreclipse.compiler.option.debug.level.1233366836" name="Generate Debugging Info" superClass="de.innot.avreclipse.compiler.option.debug.level" value="de.innot.avreclipse.compiler.option.debug.level.none" valueType="enumerated"/>
 								<option id="de.innot.avreclipse.compiler.option.optimize.2103504793" name="Optimization Level" superClass="de.innot.avreclipse.compiler.option.optimize" value="de.innot.avreclipse.compiler.optimize.three" valueType="enumerated"/>
 								<option id="de.innot.avreclipse.compiler.option.incpath.1322725337" name="Include Paths (-I)" superClass="de.innot.avreclipse.compiler.option.incpath" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoCore}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/RitchieduinoCore}&quot;"/>
 								</option>
 								<inputType id="de.innot.avreclipse.compiler.winavr.input.373029933" name="C Source Files" superClass="de.innot.avreclipse.compiler.winavr.input"/>
 							</tool>
