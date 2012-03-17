@@ -1,6 +1,6 @@
 #include "SPI.h"
 
-#include "WProgram.h"
+#include "Arduino.h"
 #include "pins_arduino.h"
 uint8_t SPITransfer(uint8_t _data) {
   SPDR = _data;

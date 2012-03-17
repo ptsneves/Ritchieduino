@@ -4,6 +4,7 @@
  *  Created on: Feb 25, 2012
  *      Author: pneves
  */
+#include "w5100.h"
 #include "Ethernet.h"
 #include "wiring.h"
 
@@ -48,17 +49,8 @@ void TCPBegin(uint8_t *mac, uint8_t *ip, uint8_t *gateway, uint8_t *subnet) {
 
 
 	W5100Start();
-
-
-
 	W5100SetMACAddress(mac);
-
-	//ValidateMacAddress(serial);
-
-
 	W5100SetIPAddress(ip);
-	//ValidateIpAddress(serial);
-
 
 	if (gateway == NULL) {
 		uint8_t default_gateway[4];
@@ -71,51 +63,43 @@ void TCPBegin(uint8_t *mac, uint8_t *ip, uint8_t *gateway, uint8_t *subnet) {
 	else {
 		W5100SetGatewayIp(gateway);
 	}
-	//ValidateGatewayAddress(serial);
-
-
 	W5100SetSubnetMask(subnet);
-	//ValidateSubnetAddress(serial);
 }
 
+/*Sets the Card in listening mode returning its success.
+ * If the socket is already listening nothing is done and
+ * success is returned.
+ */
 uint8_t TCPListen(uint16_t port)
 {
 	//Already in listening mode no need to init again
 	if (W5100ReadFromSocketSR() == status_register.LISTEN) {
-
 		return 1;
 	}
 
-
 	W5100Socket(port);
-
-
-
 	if (W5100ReadFromSocketSR() != status_register.INIT) {
-
 		return 0;
 	}
-
-
 	W5100ExecuteCommand(socket_commands.LISTEN);
-
 	if (W5100ReadFromSocketSR() != status_register.LISTEN) {
 		return 0;
 	}
-
 	return 1;
 }
 
 uint8_t TCPStatus() {
-
 	uint8_t return_value =  W5100ReadFromSocketSR();
 	return return_value;
 }
 
 uint16_t TCPAvailable() {
-
 	uint16_t return_value = W5100GetRXReceivedSize();
 	return return_value;
+}
+
+uint8_t TCPListening() {
+	return (TCPStatus() == status_register.LISTEN ? 1 : 0);
 }
 
 uint8_t TCPConnected() {
@@ -124,16 +108,13 @@ uint8_t TCPConnected() {
 			status == status_register.FIN_WAIT ||
 	(status == status_register.CLOSE_WAIT && !TCPAvailable()));
 	return return_value;
-
 }
 
 uint8_t TCPEstablished() {
 	if (W5100ReadFromSocketSR() == status_register.ESTABLISHED) {
-
 		return 1;
 	}
 	else {
-
 		return 0;
 	}
 }
@@ -178,7 +159,7 @@ uint8_t TCPConnect(uint8_t * addr, uint16_t port)
  *	castings to smaller types
  *	You can fully buffer this value once with the maximum RX_value
  */
-uint16_t TCPReceive(uint8_t *buffer, size_t len)
+uint16_t TCPReceive(void * const buffer, size_t len)
 {
 	uint16_t ret=0;
 	if ( len > 0 )
@@ -196,7 +177,7 @@ uint16_t TCPReceive(uint8_t *buffer, size_t len)
  * than W5100SSIZE, then, the data sent will only have W5100SSIZE bytes and not
  * len bytes
  */
-uint16_t TCPSend(const uint8_t * buffer, size_t len)
+uint16_t TCPSend(const void * buffer, size_t len)
 {
 	uint8_t status=0;
 	uint16_t ret=0;

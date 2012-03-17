@@ -33,7 +33,6 @@
 								<option id="de.innot.avreclipse.compiler.option.debug.level.1576022853" name="Generate Debugging Info" superClass="de.innot.avreclipse.compiler.option.debug.level" value="de.innot.avreclipse.compiler.option.debug.level.none" valueType="enumerated"/>
 								<option id="de.innot.avreclipse.compiler.option.optimize.12067532" name="Optimization Level" superClass="de.innot.avreclipse.compiler.option.optimize" value="de.innot.avreclipse.compiler.optimize.size" valueType="enumerated"/>
 								<option id="de.innot.avreclipse.compiler.option.incpath.299619423" name="Include Paths (-I)" superClass="de.innot.avreclipse.compiler.option.incpath" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/RitchieFrequencyCounter}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/RitchieSerial}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoCore}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Ritchiew5100}&quot;"/>
@@ -49,14 +48,12 @@
 							<tool id="de.innot.avreclipse.tool.linker.winavr.app.debug.277345731" name="AVR C Linker" superClass="de.innot.avreclipse.tool.linker.winavr.app.debug">
 								<option id="de.innot.avreclipse.linker.option.libpath.823203306" name="Libraries Path (-L)" superClass="de.innot.avreclipse.linker.option.libpath" valueType="stringList">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoCore/Debug}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/RitchieFrequencyCounter/Debug}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/RitchieSerial/Debug}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Ritchiew5100/Debug}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/RitchieSPI/Debug}&quot;"/>
 								</option>
 								<option id="de.innot.avreclipse.linker.option.libs.1419316571" name="Libraries (-l)" superClass="de.innot.avreclipse.linker.option.libs" valueType="libs">
 									<listOptionValue builtIn="false" value="RitchieSerial"/>
-									<listOptionValue builtIn="false" value="RitchieFrequencyCounter"/>
 									<listOptionValue builtIn="false" value="Ritchiew5100"/>
 									<listOptionValue builtIn="false" value="RitchieSPI"/>
 									<listOptionValue builtIn="false" value="ArduinoCore"/>

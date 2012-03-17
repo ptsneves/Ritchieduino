@@ -5,10 +5,10 @@
  *      Author: pneves
  */
 
-
+#include "Serial.h"
 #include "Ethernet.h"
 #include "Arduino.h"
-
+#include <stdint.h>
 
 struct ComData {
 	uint8_t mac[6];
@@ -16,19 +16,11 @@ struct ComData {
 	uint8_t gateway[4];
 	uint8_t subnet[4];
 	uint16_t port_number;
-//	uint8_t buff[2];
-//	uint8_t buff_size;
-//	uint32_t time_of_last_activity;
-//	uint32_t  allowed_connect_time;
-} __attribute__((packed));
-
+};
 
 int main() {
-	/*
-	 * This has to come first to init timers interrupts
-	 * and to disable the usart.
-	 */
 	init();
+	struct Serial *serial = SerialBegin0(9600);
 
 	struct ComData comunications = { { 0x90, 0xA2, 0xDA, 0x00, 0x24, 0xB9 },
 									{ 192,168,1,177 },
@@ -45,14 +37,18 @@ int main() {
 	TCPBegin(comunications.mac, comunications.ip, comunications.gateway,
 			comunications.subnet);
 
+	SERIAL_DEBUG_LOG(serial, "Comunications Initted\n");
 	TCPListen(comunications.port_number);
+
 	for(;;) {
 		while (TCPConnected()) {
 			if (TCPAvailable()) {
+
 				TCPReceive((uint8_t *)&receive_buffer,
 						sizeof(receive_buffer));
 
 				if (receive_buffer == '\n' && current_line_blank) {
+					SERIAL_DEBUG_LOG(serial, "Comunications Sent\n");
 					TCPSend((uint8_t *)test_string, strlen(test_string));
 					TCPStop();
 					TCPListen(comunications.port_number);
@@ -67,5 +63,7 @@ int main() {
 			}
 		}
 	}
+	while (1)
+		;
 	return 0;
 }

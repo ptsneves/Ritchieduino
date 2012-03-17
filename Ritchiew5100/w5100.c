@@ -8,7 +8,27 @@
 #include "SPI.h"
 #include "wiring.h"
 
+const struct W5100ModeRegister mode_register = { .CLOSE = 0x00, .TCP = 0x01,	.UDP = 0x02,
+			.IPRAW  = 0x03,	.MACRAW = 0x04,	.PPPOE  = 0x05,
+			.ND     = 0x20,	.MULTI  = 0x80 };
 
+const struct W5100SocketCommands socket_commands = { .OPEN = 0x01, .LISTEN   = 0x02,
+		.CONNECT = 0x04, .DISCON = 0x08, .CLOSE = 0x10,
+		.SEND = 0x20, .SEND_MAC  = 0x21, .SEND_KEEP = 0x22,
+		.RECV  = 0x40 };
+
+const struct W5100InterruptRegister interrupt_register = { .SEND_OK = 0x10, .TIMEOUT = 0x08,
+		.RECV    = 0x04, .DISCON  = 0x02,.CON = 0x01 };
+
+const struct W5100StatusRegister status_register = {.CLOSED = 0x00, .INIT  = 0x13, .LISTEN = 0x14,
+		.SYNSENT = 0x15, .SYNRECV = 0x16, .ESTABLISHED = 0x17,
+		.FIN_WAIT = 0x18, .CLOSING = 0x1A, .TIME_WAIT = 0x1B,
+		.CLOSE_WAIT = 0x1C, .LAST_ACK = 0x1D, .UDP= 0x22,
+		.IPRAW = 0x32, .MACRAW= 0x42, .PPPOE = 0x5F};
+
+const struct W5100ProtocolTypes protocol_types = { .IP = 0, .ICMP = 1, .IGMP = 2, .GGP = 3,
+		.TCP = 6, .PUP = 12, .UDP = 17, .IDP  = 22, .ND = 77,
+		.RAW = 255 };
 
 #define TXBUF_BASE 0x4000
 #define RXBUF_BASE 0x6000

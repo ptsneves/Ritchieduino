@@ -90,7 +90,7 @@ __GP_REGISTER16(UPORT,  0x002E);    // Unreachable Port address in UDP mode
  * possible to set it to short through a flag but that has side-effects
  * that are not worth discussing
  */
-static const struct W5100ModeRegister {
+struct W5100ModeRegister {
 	uint8_t CLOSE;
 	uint8_t TCP;
 	uint8_t UDP;
@@ -99,11 +99,9 @@ static const struct W5100ModeRegister {
 	uint8_t PPPOE;
 	uint8_t ND;
 	uint8_t MULTI;
-	} mode_register = { .CLOSE = 0x00, .TCP = 0x01,	.UDP = 0x02,
-			.IPRAW  = 0x03,	.MACRAW = 0x04,	.PPPOE  = 0x05,
-			.ND     = 0x20,	.MULTI  = 0x80 };
+	};
 
-static const struct W5100SocketCommands {
+struct W5100SocketCommands {
 	uint8_t OPEN;
 	uint8_t LISTEN;
 	uint8_t CONNECT;
@@ -113,21 +111,17 @@ static const struct W5100SocketCommands {
 	uint8_t SEND_MAC;
 	uint8_t SEND_KEEP;
 	uint8_t RECV;
-} socket_commands = { .OPEN = 0x01, .LISTEN   = 0x02,
-		.CONNECT = 0x04, .DISCON = 0x08, .CLOSE = 0x10,
-		.SEND = 0x20, .SEND_MAC  = 0x21, .SEND_KEEP = 0x22,
-		.RECV  = 0x40 };
+};
 
-static const struct W5100InterruptRegister {
+struct W5100InterruptRegister {
 	uint8_t SEND_OK;
 	uint8_t TIMEOUT;
 	uint8_t RECV;
 	uint8_t DISCON;
 	uint8_t CON;
-} interrupt_register = { .SEND_OK = 0x10, .TIMEOUT = 0x08,
-		.RECV    = 0x04, .DISCON  = 0x02,.CON = 0x01 };
+};
 
-static const struct W5100StatusRegister {
+struct W5100StatusRegister {
 	uint8_t CLOSED;
 	uint8_t INIT;
 	uint8_t LISTEN ;
@@ -143,13 +137,9 @@ static const struct W5100StatusRegister {
 	uint8_t IPRAW;
 	uint8_t MACRAW;
 	uint8_t PPPOE;
-} status_register = {.CLOSED = 0x00, .INIT  = 0x13, .LISTEN = 0x14,
-		.SYNSENT = 0x15, .SYNRECV = 0x16, .ESTABLISHED = 0x17,
-		.FIN_WAIT = 0x18, .CLOSING = 0x1A, .TIME_WAIT = 0x1B,
-		.CLOSE_WAIT = 0x1C, .LAST_ACK = 0x1D, .UDP= 0x22,
-		.IPRAW = 0x32, .MACRAW= 0x42, .PPPOE = 0x5F};
+};
 
-static const struct W5100ProtocolTypes {
+struct W5100ProtocolTypes {
 	uint8_t IP;
 	uint8_t ICMP;
 	uint8_t IGMP;
@@ -160,10 +150,13 @@ static const struct W5100ProtocolTypes {
 	uint8_t IDP;
 	uint8_t ND;
 	uint8_t RAW;
-} protocol_types = { .IP = 0, .ICMP = 1, .IGMP = 2, .GGP = 3,
-		.TCP = 6, .PUP = 12, .UDP = 17, .IDP  = 22, .ND = 77,
-		.RAW = 255 };
+};
 
+extern const struct W5100ModeRegister mode_register;
+extern const struct W5100SocketCommands socket_commands;
+extern const struct W5100InterruptRegister interrupt_register;
+extern const struct W5100StatusRegister status_register;
+extern const struct W5100ProtocolTypes protocol_types;
 
 /**
  * @brief	 This function is being called by send()
